@@ -27,11 +27,8 @@ export class Spacecraft {
     const newDirection = this._position.d + command
 
     if (newDirection < CardinalPoint.N) this._position.d = CardinalPoint.W
-    else if (newDirection > CardinalPoint.W) {
-      this._position.d = CardinalPoint.N
-    } else {
-      this._position.d = newDirection
-    }
+    else if (newDirection > CardinalPoint.W) this._position.d = CardinalPoint.N
+    else this._position.d = newDirection
   }
 
   public navigate(command: NavigateCommands) {
