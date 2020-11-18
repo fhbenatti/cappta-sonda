@@ -1,5 +1,5 @@
-import { FieldBoundary } from './FieldBoundary.enum'
-import { SpacecraftPosition } from './SpacecraftPosition.enum'
+import { FieldBoundary } from './FieldBoundary.interface'
+import { SpacecraftPosition } from './SpacecraftPosition.interface'
 
 export class Spacecraft {
   private readonly fieldBoundary: FieldBoundary
