@@ -35,7 +35,7 @@ describe('Test move commands', () => {
 
   beforeEach(() => {
     spacecraft = new Spacecraft({
-      fieldBoundary: { x: 10, y: 10 },
+      fieldBoundary: { x: 2, y: 2 },
       initialPosition: { x: 0, y: 0, d: CardinalPoint.N }
     })
   })
@@ -72,5 +72,35 @@ describe('Test move commands', () => {
     spacecraft.navigate('M')
     const position = spacecraft.position
     expect(position.x).toEqual(1)
+  })
+
+  it(`should keep maximum value for 'y' if it exceeds the boundary`, async () => {
+    spacecraft.navigate('M')
+    spacecraft.navigate('M')
+    spacecraft.navigate('M')
+    const positionN = spacecraft.position.y
+    spacecraft.navigate('R')
+    spacecraft.navigate('R')
+    spacecraft.navigate('M')
+    spacecraft.navigate('M')
+    spacecraft.navigate('M')
+    const positionS = spacecraft.position.y
+    expect({ n: positionN, s: positionS }).toEqual({ n: 2, s: 0 })
+  })
+
+  it(`should keep maximum value for 'x' if it exceeds the boundary`, async () => {
+    spacecraft.navigate('L')
+    spacecraft.navigate('M')
+    const positionW = spacecraft.position.x
+    spacecraft.navigate('R')
+    spacecraft.navigate('R')
+    spacecraft.navigate('M')
+    spacecraft.navigate('M')
+    spacecraft.navigate('M')
+    const positionE = spacecraft.position.x
+    expect({ w: positionW, e: positionE }).toEqual({
+      w: 0,
+      e: 2
+    })
   })
 })

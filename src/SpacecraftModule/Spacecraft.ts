@@ -32,7 +32,12 @@ export class Spacecraft {
   }
 
   private move(axis: 'x' | 'y', value: number) {
-    this._position[axis] = this._position[axis] + value
+    const currentPosition = this._position[axis]
+    const newPosition = this._position[axis] + value
+    this._position[axis] =
+      newPosition < 0 || newPosition > this._fieldBoundary[axis]
+        ? currentPosition
+        : newPosition
   }
 
   private cardinalMove = {
