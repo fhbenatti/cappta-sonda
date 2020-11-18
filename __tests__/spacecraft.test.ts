@@ -21,4 +21,11 @@ describe('Test rotate commands', () => {
     const position = spacecraft.position
     expect(position.d).toEqual(CardinalPoint.W)
   })
+
+  it('should change direction to N', async () => {
+    spacecraft.navigate('L')
+    spacecraft.navigate('R')
+    const position = spacecraft.position
+    expect(position.d).toEqual(CardinalPoint.N)
+  })
 })
