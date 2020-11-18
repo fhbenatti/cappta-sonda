@@ -2,7 +2,7 @@ import {
   CardinalPoint,
   FieldBoundary,
   Spacecraft,
-  SpacecraftPosition
+  Position
 } from './SpacecraftModule'
 
 export class MissionManager {
@@ -25,9 +25,7 @@ export class MissionManager {
     return { x: Number(match[1]), y: Number(match[2]) }
   }
 
-  private setInitialPosition(
-    initialPositionSetting: string
-  ): SpacecraftPosition {
+  private setInitialPosition(initialPositionSetting: string): Position {
     const re = /^(\d+)( \d+)( [NESW])$/
     const match = initialPositionSetting.match(re)
 
@@ -45,7 +43,7 @@ export class MissionManager {
     return this._spacecraft.fieldBoundary
   }
 
-  public getPosition(): SpacecraftPosition {
+  public getPosition(): Position {
     return this._spacecraft.position
   }
 }
