@@ -47,21 +47,3 @@ export class MissionManager {
     return this._spacecraft.position
   }
 }
-
-// const foo = new MissionManager('0 1', '0 0 S')
-// console.log(foo.getFieldBoundary())
-// console.log(foo.getPosition())
-
-// function regexTest1() {
-//   const command = '0 0'
-//   command.match('^[0-9]( [0-9])$')
-// }
-
-// function regexTest() {
-//   const command = '31 11'
-//   const re = /^\d+( \d+)$/gm
-//   const result = command.match(re)
-//   console.log(result)
-// }
-
-// regexTest()
