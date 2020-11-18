@@ -1,5 +1,5 @@
 import { FieldBoundary } from './FieldBoundary.interface'
 import { Spacecraft } from './Spacecraft'
-import { SpacecraftPosition } from './SpacecraftPosition.interface'
+import { Position } from './Position.interface'
 
-export { Spacecraft, FieldBoundary, SpacecraftPosition }
+export { Spacecraft, FieldBoundary, Position as SpacecraftPosition }

@@ -1,6 +1,6 @@
 import { CardinalPoint } from './CardinalPoint.enum'
 
-export interface SpacecraftPosition {
+export interface Position {
   x: number
   y: number
   d: CardinalPoint

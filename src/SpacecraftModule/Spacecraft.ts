@@ -1,13 +1,13 @@
 import { FieldBoundary } from './FieldBoundary.interface'
-import { SpacecraftPosition } from './SpacecraftPosition.interface'
+import { Position } from './Position.interface'
 
 export class Spacecraft {
   private readonly fieldBoundary: FieldBoundary
-  private readonly position: SpacecraftPosition
+  private readonly position: Position
 
   constructor(parameters: {
     fieldBoundary: FieldBoundary
-    initialPosition: SpacecraftPosition
+    initialPosition: Position
   }) {
     this.fieldBoundary = parameters.fieldBoundary
     this.position = parameters.initialPosition
