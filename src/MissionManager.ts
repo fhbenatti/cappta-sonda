@@ -46,4 +46,19 @@ export class MissionManager {
   public getPosition(): Position {
     return this._spacecraft.position
   }
+
+  public navigate(commandBuffer: string): Position {
+    const re = /^[LRM]+$/
+    const match = commandBuffer.toUpperCase().match(re)
+
+    if (!match) {
+      throw new Error('Invalid params')
+    }
+
+    commandBuffer
+      .split('')
+      .map(c => this._spacecraft.navigate(c as 'L' | 'R' | 'M'))
+
+    return this.getPosition()
+  }
 }

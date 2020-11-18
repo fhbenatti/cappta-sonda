@@ -16,4 +16,18 @@ describe('Test MissionManager', () => {
       expect(() => new MissionManager('5 5', '  H')).toThrow(Error)
     })
   })
+
+  describe('Test navigation', () => {
+    it('should return a spacecraft at position 1 1 1(E)', async () => {
+      const missionManager = new MissionManager('5 5', '0 0 N')
+      missionManager.navigate('MRM')
+      expect(missionManager.getPosition()).toEqual({ x: 1, y: 1, d: 1 })
+    })
+
+    it('should return a spacecraft at position 5 3 2(S)', async () => {
+      const missionManager = new MissionManager('5 5', '7 7 S')
+      missionManager.navigate('MM')
+      expect(missionManager.getPosition()).toEqual({ x: 5, y: 3, d: 2 })
+    })
+  })
 })
