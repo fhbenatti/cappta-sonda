@@ -19,8 +19,22 @@ export class Spacecraft {
     fieldBoundary: FieldBoundary
     initialPosition: Position
   }) {
-    this._fieldBoundary = parameters.fieldBoundary
-    this._position = parameters.initialPosition
+    this._fieldBoundary = {
+      x: parameters.fieldBoundary.x < 0 ? 0 : parameters.fieldBoundary.x,
+      y: parameters.fieldBoundary.y < 0 ? 0 : parameters.fieldBoundary.y
+    }
+
+    this._position = {
+      x:
+        parameters.initialPosition.x > parameters.fieldBoundary.x
+          ? parameters.fieldBoundary.x
+          : parameters.initialPosition.x,
+      y:
+        parameters.initialPosition.y > parameters.fieldBoundary.x
+          ? parameters.fieldBoundary.y
+          : parameters.initialPosition.y,
+      d: parameters.initialPosition.d
+    }
   }
 
   private rotate(command: Rotate) {

@@ -104,3 +104,31 @@ describe('Test move commands', () => {
     })
   })
 })
+
+describe('Test new instances of Spacecraft', () => {
+  it('should set field boundaries to 0,0 when negative', async () => {
+    const spacecraft = new Spacecraft({
+      fieldBoundary: { x: -1, y: -1 },
+      initialPosition: { x: 0, y: 0, d: CardinalPoint.N }
+    })
+
+    expect({
+      x: spacecraft.fieldBoundary.x,
+      y: spacecraft.fieldBoundary.y
+    }).toEqual({ x: 0, y: 0 })
+  })
+
+  it('should set inital position at boundaries of exploring field', async () => {
+    const boundaries = { x: 5, y: 5 }
+
+    const spacecraft = new Spacecraft({
+      fieldBoundary: boundaries,
+      initialPosition: { x: 10, y: 10, d: CardinalPoint.N }
+    })
+
+    expect({
+      x: spacecraft.position.x,
+      y: spacecraft.position.y
+    }).toEqual(boundaries)
+  })
+})
