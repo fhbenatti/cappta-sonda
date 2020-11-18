@@ -1,3 +1,5 @@
+import { Spacecraft, CardinalPoint } from '../src/SpacecraftModule/index'
+
 const { system, filesystem } = require('gluegun')
 
 const src = filesystem.path(__dirname, '..')
