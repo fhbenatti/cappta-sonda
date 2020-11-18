@@ -31,11 +31,22 @@ export class Spacecraft {
     else this._position.d = newDirection
   }
 
+  private move(axis: 'x' | 'y', value: number) {
+    this._position[axis] = this._position[axis] + value
+  }
+
+  private cardinalMove = {
+    N: () => this.move('y', 1),
+    E: () => this.move('x', 1),
+    S: () => this.move('y', -1),
+    W: () => this.move('x', -1)
+  }
+
   public navigate(command: NavigateCommands) {
     if (['L', 'R'].some(c => c === command)) {
       this.rotate(Rotate[command])
     } else {
-      // move
+      this.cardinalMove[CardinalPoint[this._position.d]]()
     }
   }
 }
