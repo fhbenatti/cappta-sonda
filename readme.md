@@ -23,6 +23,14 @@ Aplicação em Node.js do tipo CLI baseada na lib Gluegun: https://github.com/in
 
 Node.js: https://nodejs.org/en/download/
 
+## Instalação das dependências
+
+Para instalar as dependências do projeto, execute:
+
+```shell
+$ npm install
+```
+
 ## Testes
 
 Execute:
