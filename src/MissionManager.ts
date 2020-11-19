@@ -15,9 +15,17 @@ export class MissionManager {
     })
   }
 
+  public getFieldBoundary(): FieldBoundary {
+    return this._spacecraft.fieldBoundary
+  }
+
+  public getPosition(): Position {
+    return this._spacecraft.position
+  }
+
   private setFieldBoundary(fieldSetting: string): FieldBoundary {
     const re = /(^\d+)( \d+)$/
-    const match = fieldSetting.match(re)
+    const match = fieldSetting.trim().match(re)
 
     if (!match) {
       throw new Error('Invalid params')
@@ -27,7 +35,10 @@ export class MissionManager {
 
   private setInitialPosition(initialPositionSetting: string): Position {
     const re = /^(\d+)( \d+)( [NESW])$/
-    const match = initialPositionSetting.match(re)
+    const match = initialPositionSetting
+      .toUpperCase()
+      .trim()
+      .match(re)
 
     if (!match) {
       throw new Error('Invalid params')
@@ -39,23 +50,16 @@ export class MissionManager {
     }
   }
 
-  public getFieldBoundary(): FieldBoundary {
-    return this._spacecraft.fieldBoundary
-  }
-
-  public getPosition(): Position {
-    return this._spacecraft.position
-  }
-
   public navigate(commandBuffer: string): Position {
+    const _commandBuffer = commandBuffer.toUpperCase().trim()
     const re = /^[LRM]+$/
-    const match = commandBuffer.toUpperCase().match(re)
+    const match = _commandBuffer.match(re)
 
     if (!match) {
       throw new Error('Invalid params')
     }
 
-    commandBuffer
+    _commandBuffer
       .split('')
       .map(c => this._spacecraft.navigate(c as 'L' | 'R' | 'M'))
 
