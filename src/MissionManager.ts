@@ -28,7 +28,9 @@ export class MissionManager {
     const match = fieldSetting.trim().match(re)
 
     if (!match) {
-      throw new Error('Invalid params')
+      throw new Error(
+        `[ER1] Invalid params for FieldBoundary: '${fieldSetting}'`
+      )
     }
     return { x: Number(match[1]), y: Number(match[2]) }
   }
@@ -41,7 +43,9 @@ export class MissionManager {
       .match(re)
 
     if (!match) {
-      throw new Error('Invalid params')
+      throw new Error(
+        `[ER2] Invalid params for Position: '${initialPositionSetting}'`
+      )
     }
     return {
       x: Number(match[1]),
@@ -56,7 +60,7 @@ export class MissionManager {
     const match = _commandBuffer.match(re)
 
     if (!match) {
-      throw new Error('Invalid params')
+      throw new Error(`[ER3] Invalid navigate command: '${commandBuffer}'`)
     }
 
     _commandBuffer

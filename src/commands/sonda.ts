@@ -1,6 +1,6 @@
 import { GluegunCommand } from 'gluegun'
 import { MissionManager } from '../MissionManager'
-import { CardinalPoint } from '../SpacecraftModule'
+import { CardinalPoint, Position } from '../SpacecraftModule'
 
 const command: GluegunCommand = {
   name: 'sonda',
@@ -15,9 +15,14 @@ const command: GluegunCommand = {
       name: 'fieldBoundary',
       message: 'Informe as coordenadas limites da exploração: (Ex: 5 5)'
     }
-    const { fieldBoundary } = await toolbox.prompt.ask(askFieldBoundary)
+    let { fieldBoundary } = await toolbox.prompt.ask(askFieldBoundary)
 
     while (true) {
+      if (!fieldBoundary) {
+        fieldBoundary = (await toolbox.prompt.ask(askFieldBoundary))
+          .fieldBoundary
+      }
+
       print.divider()
       print.fancy(`SONDA NRO ${spacecraftId}`)
       print.divider()
@@ -43,8 +48,26 @@ const command: GluegunCommand = {
         askNavigateCommand
       )
 
-      const missionManager = new MissionManager(fieldBoundary, initialPosition)
-      const spacecraftPosition = missionManager.navigate(navigateCommandBuffer)
+      let missionManager: MissionManager = null
+      try {
+        missionManager = new MissionManager(fieldBoundary, initialPosition)
+      } catch (error) {
+        print.error('Erro de lançamento. Execute a missão novamente.')
+        print.error(error.message)
+        if (error.message.startsWith('[ER1]')) {
+          fieldBoundary = null
+        }
+        continue
+      }
+
+      let spacecraftPosition: Position = null
+      try {
+        spacecraftPosition = missionManager.navigate(navigateCommandBuffer)
+      } catch (error) {
+        print.error('Erro de navegação. Execute a missão novamente.')
+        print.error(error.message)
+        continue
+      }
 
       print.newline()
       print.success(
